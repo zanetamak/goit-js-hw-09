@@ -2,7 +2,7 @@
 const body = document.querySelector('body');
 const bthStart = document.querySelector('button[data-start]');
 // czasem kilka elementów w bloku moze mieć np data-start dlatego warto zawęzić wyszukiwanie elementu
-const bthStop = document.querySelector('nutton[data-stop]');
+const bthStop = document.querySelector('button[data-stop]');
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
