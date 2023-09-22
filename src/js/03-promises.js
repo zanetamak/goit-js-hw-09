@@ -12,7 +12,7 @@ function createPromise(position, delay) {
   } else {
     reject({ position, delay })
       }
-    });
+    }, delay);
   });
 }
 
@@ -23,10 +23,14 @@ const handleSubmit = event => { // event jako zdarzenie przesłania formularza
   const delayStep = Number.parseInt(event.target.elements['step'].value);
   const amount = Number.parseInt(event.target.elements['amount'].value);
 
-
+  createPromises(firstDelay, delayStep, amount);
+}
+  
+function createPromises(firstDelay, delayStep, amount) {
+  let currentDelay = firstDelay;
   for (let i = 0; i < amount; i++) {
     
-    createPromise(i, firstDelay + delayStep * i)
+    createPromise(i, currentDelay)
       .then(({ position, delay }) => { // then obsługuje tylko pomyślne wykonanie obietnicy
         Notiflix.Notify.success(
           `✅ Fulfilled promise ${position} in ${delay}ms`
@@ -37,6 +41,7 @@ const handleSubmit = event => { // event jako zdarzenie przesłania formularza
           `❌ Rejected promise ${position} in ${delay}ms`
         );
       });
+     currentDelay += delayStep;
   };
 };
 
